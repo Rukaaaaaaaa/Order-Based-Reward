@@ -30,12 +30,6 @@ Before running the project, make sure you have:
 ---
 
 # 📁 Project Structure
-.
-├── OrderReward.sol
-├── RewardToken.sol
-└── index.html
-
-
 - `RewardToken.sol` – ERC20 token contract  
 - `OrderReward.sol` – Registration and reward distribution logic  
 - `index.html` – Frontend interface for interacting with the contracts  
