@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Order Based Reward</title>
+  </head>
+  <body>
+    <h2>Order-Based Reward DApp</h2>
+
+    <button onclick="connect()">Connect MetaMask</button>
+    <button onclick="register()">Register</button>
+    <button onclick="checkBalance()">Check Balance</button>
+
+    <h3>Token Balances</h3>
+    <button onclick="checkAllBalances()">Check All Balances</button>
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Account</th>
+          <th>Balance (RWT)</th>
+        </tr>
+      </thead>
+      <tbody id="balanceTable"></tbody>
+    </table>
+
+    <p id="account"></p>
+    <p id="balance"></p>
+
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.6.2/dist/ethers.umd.min.js"></script>
+
+    <script>
+      let provider;
+      let signer;
+      let contract;
+
+      const contractAddress = "0xf1355E454604E5cE124da06fe4C209Aa2e37a6C6";
+
+      const abi = [
+        "function register() external",
+        "function totalRegistered() view returns(uint)",
+      ];
+
+      async function connect() {
+        if (window.ethereum) {
+          provider = new ethers.BrowserProvider(window.ethereum);
+          await provider.send("eth_requestAccounts", []);
+          signer = await provider.getSigner();
+          document.getElementById("account").innerText =
+            "Connected: " + (await signer.getAddress());
+
+          contract = new ethers.Contract(contractAddress, abi, signer);
+        }
+      }
+
+      async function register() {
+        const tx = await contract.register();
+        await tx.wait();
+        alert("Registered successfully!");
+      }
+
+      async function checkBalance() {
+        const tokenAddress = "0x4b795f78b278455Db4E603e78BB7c5CD72Ed4A41";
+
+        const tokenAbi = ["function balanceOf(address) view returns (uint256)"];
+
+        const token = new ethers.Contract(tokenAddress, tokenAbi, provider);
+
+        const address = await signer.getAddress();
+        console.log("Checking balance for:", address);
+
+        const balance = await token.balanceOf(address);
+        console.log("Raw balance:", balance.toString());
+
+        document.getElementById("balance").innerText =
+          "Token balance: " + ethers.formatEther(balance);
+      }
+
+      async function checkAllBalances() {
+        const tokenAddress = "0x4b795f78b278455Db4E603e78BB7c5CD72Ed4A41";
+
+        const tokenAbi = ["function balanceOf(address) view returns (uint256)"];
+
+        const token = new ethers.Contract(tokenAddress, tokenAbi, provider);
+
+        const accounts = [
+          "0x3DA0Ee8836b7C1168123cF7f7dE404266004Fe6c",
+          "0x7b6Bf549ea01b483B82a197090a0fD2d2bd0d279",
+          "0x6D415b1612914F30FF2E603D7848c29394DBf8Ba",
+          "0x91B917016edB65bde77d712b6339D06282595D8d",
+        ];
+
+        const table = document.getElementById("balanceTable");
+        table.innerHTML = "";
+
+        for (let acc of accounts) {
+          const balance = await token.balanceOf(acc);
+
+          const row = `
+      <tr>
+        <td>${acc}</td>
+        <td>${ethers.formatEther(balance)}</td>
+      </tr>
+    `;
+
+          table.innerHTML += row;
+        }
+      }
+    </script>
+  </body>
+</html>
