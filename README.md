@@ -29,10 +29,12 @@ The system ensures:
 ✅ Bonus rewards for early participants
 
 📂 Project Structure
-.
-├── OrderReward.sol      # Reward distribution smart contract
-├── RewardToken.sol      # ERC20 token contract
-└── index.html           # Frontend interface
+
+├── contracts
+│   ├── OrderReward.sol
+│   └── RewardToken.sol
+└── frontend
+    └── index.html
 
 🏗 Smart Contracts
 1️⃣ RewardToken.sol
