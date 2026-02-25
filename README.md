@@ -1,109 +1,158 @@
-🪙 Order-Based Reward Distribution DApp
+# 🪙 Order-Based Reward Distribution DApp
 
-A decentralized Ethereum application that distributes ERC20 token rewards based on user registration order.
+A decentralized reward distribution application built on **Ethereum**, where users receive **ERC20 token rewards based on their registration order**.
 
-Early participants receive bonus rewards, and all reward logic is executed entirely on-chain.
+All reward logic is executed fully **on-chain** using Solidity smart contracts, ensuring transparency, immutability, and eliminating centralized manipulation.
 
-=================================================================
+---
 
-📌 Features
+# 📌 Overview
 
-ERC20 token implementation using OpenZeppelin
+This DApp rewards early participants with bonus tokens:
 
-Order-based reward distribution
+- **First 3 users** → `150 tokens` (50 base + 100 bonus)
+- **All subsequent users** → `50 tokens`
+- Each wallet can **register only once**
 
-Bonus rewards for early participants
+The entire reward mechanism is handled directly by smart contracts deployed on Ethereum.
 
-One-time registration per wallet address
+---
 
-MetaMask wallet integration
+# 🛠 Requirements
 
-Frontend interaction using ethers.js
+Before running the project, make sure you have:
 
-=================================================================
+- Node.js (if using Hardhat)
+- Remix IDE (alternative deployment method)
+- MetaMask browser extension
+- A test network (e.g., Sepolia)
 
-📁 Project Structure
-OrderReward.sol – Reward distribution smart contract
+---
 
-RewardToken.sol – ERC20 token contract
+# 📁 Project Structure
+.
+├── OrderReward.sol
+├── RewardToken.sol
+└── index.html
 
-index.html – Frontend interface
 
-=================================================================
+- `RewardToken.sol` – ERC20 token contract  
+- `OrderReward.sol` – Registration and reward distribution logic  
+- `index.html` – Frontend interface for interacting with the contracts  
 
-🏗 Smart Contracts
-RewardToken.sol
+---
 
-Implements ERC20 standard
+# 🏗 Smart Contract Logic
 
-Handles token minting
+## 🎯 Reward Rules
 
-Manages balances securely
+| Registration Order | Reward |
+|-------------------|--------|
+| 1st user          | 150 tokens |
+| 2nd user          | 150 tokens |
+| 3rd user          | 150 tokens |
+| 4th+ users        | 50 tokens  |
 
-OrderReward.sol
+## 🔐 Security Design
 
-Registers users
+- Prevents duplicate registrations
+- On-chain reward calculation
+- Uses OpenZeppelin ERC20 standard implementation
+- No centralized reward control
+- Transparent and verifiable logic
 
-Tracks registration order
+---
 
-Distributes rewards
+# 🚀 Deployment Steps
 
-Prevents duplicate registration
+## 1️⃣ Deploy RewardToken
 
-Reward Logic
+Deploy `RewardToken.sol` using:
+Remix IDE
+or
+Hardhat
 
-First 3 users → 150 tokens (50 base + 100 bonus)
+Save the deployed contract address.
 
-Other users → 50 tokens
+---
 
-Each wallet can register only once
+## 2️⃣ Deploy OrderReward
 
-=================================================================
+Deploy `OrderReward.sol` and pass the `RewardToken` contract address into the constructor.
 
-🌐 Frontend
+---
 
-The index.html file:
+## 3️⃣ Grant Mint Permission
 
-Connects to MetaMask
+Ensure the `OrderReward` contract has permission to mint tokens.
 
-Sends registration transactions
+Depending on your implementation, you may need to:
+Transfer ownership
+or
+Grant MINTER_ROLE
 
-Displays token balances
+---
 
-Uses ethers.js (v6) for contract interaction
+## 4️⃣ Update Frontend
 
-=================================================================
+Inside `index.html`, update:
+Token contract address
+OrderReward contract address
+Network configuration
 
-🚀 Deployment Steps
 
-Deploy RewardToken.sol
+---
 
-Deploy OrderReward.sol with token address
+# ▶️ Running the Frontend
 
-Grant mint permission if required
+1. Open `index.html` in your browser  
+2. Click **Connect MetaMask**  
+3. Register your wallet  
+4. Check your token balance  
 
-Update contract address in index.html
+To test reward tiers, switch between multiple MetaMask accounts.
 
-Connect MetaMask and test
+---
 
-=================================================================
+# 🧪 Testing Scenario
 
-🛠 Technologies Used
+| Account | Expected Result |
+|----------|----------------|
+| Account 1 | 150 tokens |
+| Account 2 | 150 tokens |
+| Account 3 | 150 tokens |
+| Account 4 | 50 tokens |
+| Duplicate registration | ❌ Transaction fails |
 
+---
+
+# 🧰 Technologies Used
 Solidity
-
-OpenZeppelin
-
+OpenZeppelin Contracts
 Ethereum
-
 MetaMask
-
-ethers.js
-
+ethers.js (v6)
 HTML / JavaScript
 
-=================================================================
 
-📄 License
+---
 
-MIT License
+# 💡 Key Features
+
+- Fully decentralized reward logic  
+- Gas-efficient registration system  
+- Transparent on-chain verification  
+- Fair early-user incentive mechanism  
+
+---
+
+# 👨‍💻 Author
+
+Vu Phung Trung Kien  
+Smart Contract Implementation Project  
+
+---
+
+# 📄 License
+
+This project is licensed under the MIT License.
