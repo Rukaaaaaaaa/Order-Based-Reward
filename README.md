@@ -1,173 +1,98 @@
-📘 Order-Based Reward Distribution DApp
+🪙 Order-Based Reward Distribution DApp
 
-A decentralized application (DApp) built on Ethereum that distributes ERC20 token rewards based on user registration order.
+A decentralized Ethereum application that distributes ERC20 token rewards based on user registration order.
 
-Early participants receive bonus rewards, and all reward logic is enforced on-chain using smart contracts.
+Early participants receive bonus rewards, and all reward logic is executed entirely on-chain.
 
-🚀 Overview
+=================================================================
 
-This project demonstrates:
+📌 Features
 
-ERC20 token creation using OpenZeppelin
+ERC20 token implementation using OpenZeppelin
 
-Smart contract-based reward distribution
+Order-based reward distribution
 
-Order-based bonus mechanism
+Bonus rewards for early participants
+
+One-time registration per wallet address
 
 MetaMask wallet integration
 
 Frontend interaction using ethers.js
 
-The system ensures:
+=================================================================
 
-✅ Transparent reward allocation
-
-✅ On-chain enforcement of rules
-
-✅ One-time registration per address
-
-✅ Bonus rewards for early participants
-
-📂 Project Structure
-
+📁 Project Structure
 OrderReward.sol – Reward distribution smart contract
 
 RewardToken.sol – ERC20 token contract
 
 index.html – Frontend interface
 
-🏗 Smart Contracts
-1️⃣ RewardToken.sol
+=================================================================
 
-Implements ERC20 token standard using OpenZeppelin
+🏗 Smart Contracts
+RewardToken.sol
+
+Implements ERC20 standard
 
 Handles token minting
 
-Restricts minting access to the reward contract
+Manages balances securely
 
-Key Features:
+OrderReward.sol
 
-ERC20 compliant
-
-Secure mint function
-
-Used as reward currency
-
-2️⃣ OrderReward.sol
-
-Core logic contract that:
-
-Allows users to register once
+Registers users
 
 Tracks registration order
 
-Distributes rewards based on order
-
-Calls RewardToken contract to mint tokens
-
-Reward Logic:
-| Registration Order | Reward                           |
-| ------------------ | -------------------------------- |
-| First 3 users      | 150 tokens (50 base + 100 bonus) |
-| Others             | 50 tokens                        |
-
-Security Features:
+Distributes rewards
 
 Prevents duplicate registration
 
-Enforces order-based bonus logic
+Reward Logic
 
-Fully on-chain verification
+First 3 users → 150 tokens (50 base + 100 bonus)
 
-🌐 Frontend (index.html)
+Other users → 50 tokens
 
-The frontend:
+Each wallet can register only once
+
+=================================================================
+
+🌐 Frontend
+
+The index.html file:
 
 Connects to MetaMask
 
-Calls smart contract functions
-
-Displays token balance
-
 Sends registration transactions
 
-Built using:
+Displays token balances
 
-HTML
+Uses ethers.js (v6) for contract interaction
 
-JavaScript
+=================================================================
 
-ethers.js (v6)
+🚀 Deployment Steps
 
-⚙️ How to Deploy
-Step 1: Deploy RewardToken
+Deploy RewardToken.sol
 
-Deploy RewardToken.sol using:
+Deploy OrderReward.sol with token address
 
-Remix IDE
-or
+Grant mint permission if required
 
-Hardhat
+Update contract address in index.html
 
-Save the deployed contract address.
+Connect MetaMask and test
 
-Step 2: Deploy OrderReward
-
-Deploy OrderReward.sol, passing:
-
-RewardToken contract address
-
-Step 3: Set Mint Permission
-
-If required, transfer ownership or grant minting role to the OrderReward contract.
-
-Step 4: Update Frontend
-
-Inside index.html, update:
-
-Contract address
-
-ABI
-
-Network configuration
-
-🧪 Testing
-
-Test with multiple MetaMask accounts:
-
-Connect wallet
-
-Register
-
-Confirm transaction
-
-Check token balance
-
-Repeat with different accounts
-
-Expected result:
-
-First 3 accounts receive 150 tokens
-
-Later accounts receive 50 tokens
-
-Duplicate registration fails
-
-🔒 Security Considerations
-
-Uses OpenZeppelin ERC20 standard
-
-One-time registration mapping
-
-On-chain validation
-
-No centralized reward control
+=================================================================
 
 🛠 Technologies Used
 
 Solidity
 
-OpenZeppelin Contracts
+OpenZeppelin
 
 Ethereum
 
@@ -177,17 +102,7 @@ ethers.js
 
 HTML / JavaScript
 
-📌 Future Improvements
-
-Add event logging for better UI feedback
-
-Deploy to testnet (Sepolia / Goerli)
-
-Add admin dashboard
-
-Improve UI design
-
-Add automated tests using Hardhat
+=================================================================
 
 📄 License
 
