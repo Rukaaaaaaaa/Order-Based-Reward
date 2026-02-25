@@ -30,12 +30,11 @@ The system ensures:
 
 📂 Project Structure
 
-.
-├── contracts
-│   ├── OrderReward.sol
-│   └── RewardToken.sol
-└── frontend
-    └── index.html
+OrderReward.sol – Reward distribution smart contract
+
+RewardToken.sol – ERC20 token contract
+
+index.html – Frontend interface
 
 🏗 Smart Contracts
 1️⃣ RewardToken.sol
